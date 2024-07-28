@@ -14,6 +14,16 @@ cluster-create:
 cluster-delete:
 	kind delete cluster --name=${CLUSTER_NAME}
 
+.PHONY: flux-bootstrap
+flux-bootstrap:
+	flux bootstrap github \
+		--token-auth \
+		--owner=jonathanfoster \
+		--repository=gitops-fleet \
+		--branch=main \
+		--path=clusters/local \
+		--personal
+
 .PHONY: install-toolchain
 install-toolchain:
 	brew install fluxcd/tap/flux
