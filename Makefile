@@ -4,7 +4,7 @@ SHELL = /usr/bin/env bash -o pipefail
 CLUSTER_NAME = gitops-fleet
 
 .PHONY: all
-all:
+all: lint
 
 .PHONY: cluster-create
 cluster-create:
@@ -29,3 +29,10 @@ install-toolchain:
 	brew install fluxcd/tap/flux
 	brew install helm
 	brew install kind
+	brew install kubeconform
+	brew install kustomize
+	brew install yq
+
+.PHONY: lint
+lint:
+	./scripts/validate.sh
